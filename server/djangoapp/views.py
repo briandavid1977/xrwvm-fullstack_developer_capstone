@@ -140,3 +140,18 @@ def registration(request):
         "userName": user.username,
         "status": "Authenticated",
     })
+
+
+def get_cars(request):
+    from .models import CarMake, CarModel
+    from .populate import initiate
+
+    if not CarMake.objects.exists():
+        initiate()
+
+    car_models = CarModel.objects.select_related("car_make").order_by("id")
+    cars = [
+        {"CarModel": model.name, "CarMake": model.car_make.name}
+        for model in car_models
+    ]
+    return JsonResponse({"CarModels": cars})
