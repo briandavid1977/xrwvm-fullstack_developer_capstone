@@ -155,3 +155,95 @@ def get_cars(request):
         for model in car_models
     ]
     return JsonResponse({"CarModels": cars})
+
+
+from .restapis import get_request, analyze_review_sentiments, post_review
+from requests.exceptions import RequestException
+from urllib.parse import quote
+
+
+def get_dealerships(request, state="All"):
+    endpoint = "/fetchDealers"
+    if state != "All":
+        endpoint += "/" + quote(state, safe="")
+    try:
+        dealers = get_request(endpoint)
+        return JsonResponse({"status": 200, "dealers": dealers})
+    except (RequestException, ValueError):
+        return JsonResponse(
+            {"status": 502, "message": "Unable to fetch dealerships."},
+            status=502,
+        )
+
+
+def get_dealer_details(request, dealer_id):
+    try:
+        details = get_request(f"/fetchDealer/{dealer_id}")
+        return JsonResponse({"status": 200, "dealer": details})
+    except (RequestException, ValueError):
+        return JsonResponse(
+            {"status": 502, "message": "Unable to fetch dealer details."},
+            status=502,
+        )
+
+
+def get_dealer_reviews(request, dealer_id):
+    try:
+        reviews = get_request(f"/fetchReviews/dealer/{dealer_id}")
+        for review in reviews:
+            result = analyze_review_sentiments(review["review"])
+            review["sentiment"] = result["sentiment"]
+        return JsonResponse({"status": 200, "reviews": reviews})
+    except (RequestException, ValueError, KeyError):
+        return JsonResponse(
+            {"status": 502, "message": "Unable to fetch and analyze reviews."},
+            status=502,
+        )
+
+
+@csrf_exempt
+def add_review(request):
+    if request.method != "POST":
+        return JsonResponse(
+            {"status": 405, "message": "Use POST to add a review."},
+            status=405,
+        )
+
+    if not request.user.is_authenticated:
+        return JsonResponse(
+            {"status": 403, "message": "Unauthorized"},
+            status=403,
+        )
+
+    try:
+        data = json.loads(request.body)
+    except (ValueError, UnicodeDecodeError):
+        return JsonResponse(
+            {"status": 400, "message": "Invalid JSON."},
+            status=400,
+        )
+
+    required = [
+        "dealership", "review", "purchase", "purchase_date",
+        "car_make", "car_model", "car_year",
+    ]
+    if not isinstance(data, dict) or any(key not in data for key in required):
+        return JsonResponse(
+            {"status": 400, "message": "Missing required review fields."},
+            status=400,
+        )
+
+    data["name"] = request.user.get_full_name() or request.user.username
+
+    try:
+        saved_review = post_review(data)
+        return JsonResponse({
+            "status": 200,
+            "message": "Review posted successfully.",
+            "review": saved_review,
+        })
+    except (RequestException, ValueError):
+        return JsonResponse(
+            {"status": 502, "message": "Error in posting review."},
+            status=502,
+        )
