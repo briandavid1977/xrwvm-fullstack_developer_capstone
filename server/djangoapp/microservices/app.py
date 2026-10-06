@@ -1,10 +1,10 @@
+import nltk
+from pathlib import Path
 from flask import Flask
 from nltk.sentiment import SentimentIntensityAnalyzer
 import json
 app = Flask("Sentiment Analyzer")
 
-import nltk
-from pathlib import Path
 
 nltk.data.path.insert(0, str(Path(__file__).resolve().parent))
 sia = SentimentIntensityAnalyzer()
