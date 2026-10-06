@@ -1,68 +1,110 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Link the style sheet here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Cars Dealership</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+    .team .card {
+      width: 300px;
+    }
+    .team img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+  </style>
 </head>
-<div>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+<body>
+  <nav class="navbar navbar-expand navbar-light"
+       style="background-color: darkturquoise;">
     <div class="container-fluid">
-      <h2 style="padding-right: 5%;">Dealerships</h2>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-          </li>
-        </ul>
-      </div>
+      <a class="navbar-brand" href="/">Dealerships</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"
+             href="/about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
     </div>
   </nav>
-  
-    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
-      </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
-        </div>
-      </div>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
-        </div>
-      </div>
+  <main class="container py-5">
+    <h1>About Cars Dealership</h1>
+    <p>
+      Cars Dealership connects customers with dealerships across
+      the United States. Browse our locations, read customer reviews,
+      and share your buying experience.
+    </p>
+    <h2 class="my-4">Meet Our Team</h2>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
+    <div class="team">
+      <article class="card">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg"
+             alt="Portrait of Daniel Carter">
         <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
+          <h3 class="h4">Daniel Carter</h3>
+          <p><strong>General Manager</strong></p>
+          <p>
+            Daniel oversees dealership operations and customer service.
+            He helps our teams deliver a straightforward buying experience.
+          </p>
+          <a href="mailto:daniel.carter@carsdealership.example">
+            daniel.carter@carsdealership.example
+          </a>
         </div>
-      </div>
-    </div>
-    </div>
-    </div>
-    
-</div>
+      </article>
 
+      <article class="card">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg"
+             alt="Portrait of Maya Thompson">
+        <div class="card-body">
+          <h3 class="h4">Maya Thompson</h3>
+          <p><strong>Sales Director</strong></p>
+          <p>
+            Maya helps customers compare vehicles and find suitable options.
+            She trains our sales teams to answer questions clearly.
+          </p>
+          <a href="mailto:maya.thompson@carsdealership.example">
+            maya.thompson@carsdealership.example
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://randomuser.me/api/portraits/men/75.jpg"
+             alt="Portrait of James Wilson">
+        <div class="card-body">
+          <h3 class="h4">James Wilson</h3>
+          <p><strong>Customer Support Manager</strong></p>
+          <p>
+            James handles customer questions and dealership feedback.
+            He works with local teams to resolve concerns promptly.
+          </p>
+          <a href="mailto:james.wilson@carsdealership.example">
+            james.wilson@carsdealership.example
+          </a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="container pb-4">
+    <small>Cars Dealership — a capstone demonstration project.</small>
+  </footer>
+</body>
 </html>
