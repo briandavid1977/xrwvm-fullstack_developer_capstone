@@ -1,3 +1,6 @@
+from .restapis import get_request, analyze_review_sentiments, post_review
+from requests.exceptions import RequestException
+from urllib.parse import quote
 # Uncomment the required imports before adding the code
 
 # from django.shortcuts import render
@@ -155,11 +158,6 @@ def get_cars(request):
         for model in car_models
     ]
     return JsonResponse({"CarModels": cars})
-
-
-from .restapis import get_request, analyze_review_sentiments, post_review
-from requests.exceptions import RequestException
-from urllib.parse import quote
 
 
 def get_dealerships(request, state="All"):
