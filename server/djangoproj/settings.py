@@ -148,3 +148,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/build/static'),
 ]
 
+
+# Allow this Docker lab's application address.
+ALLOWED_HOSTS = list(set(ALLOWED_HOSTS + ["briandavid19-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai", "localhost", "127.0.0.1"]))
+CSRF_TRUSTED_ORIGINS = list(set(CSRF_TRUSTED_ORIGINS + ["https://briandavid19-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"]))
